@@ -9,7 +9,7 @@ import { LoginPage } from "@/auth";
 import { CalendarPage } from "@/calendar";
 import { AUTH_STATUS, URL_PATH } from "@/libs";
 
-const authStatus = AUTH_STATUS.UNAUTHORIZED;
+const authStatus = AUTH_STATUS.AUTHORIZED;
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

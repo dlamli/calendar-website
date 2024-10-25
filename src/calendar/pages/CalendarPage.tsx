@@ -1,3 +1,9 @@
+import { Navbar } from "@/calendar";
+
 export const CalendarPage = () => {
-  return <div>CalendarPage</div>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
