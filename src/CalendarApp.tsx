@@ -1,9 +1,10 @@
-import { AppRouter } from "@/routes";
+import { RouterProvider } from "react-router-dom";
+import { router } from "@/routes/router";
 
 export const CalendarApp = () => {
   return (
     <>
-      <AppRouter />
+      <RouterProvider router={router} />
     </>
   );
 };
