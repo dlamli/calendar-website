@@ -1,4 +1,4 @@
-import { SyntheticEvent } from "react";
+import React, { SyntheticEvent } from "react";
 import { View } from "react-big-calendar";
 
 export type TIcon = {
@@ -43,3 +43,22 @@ export type TonSelect = (
 export type TonViewChange = (e: View) => void;
 
 export type TView = View | undefined;
+
+export type TCalendarModal = {
+  children?: React.ReactNode;
+};
+
+export type TFormValue = {
+  title: string;
+  notes?: string;
+  start: Date;
+  end: Date;
+};
+
+export type TDateProperty = "start" | "end";
+
+export type TDate = Date | null;
+
+export type TonInputChange = {
+  target: HTMLInputElement | HTMLTextAreaElement;
+};

@@ -3,7 +3,7 @@ import { Calendar } from "react-big-calendar";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import { CalendarEvent, Navbar } from "@/calendar";
+import { CalendarEvent, CalendarModal, Navbar } from "@/calendar";
 import {
   initCalendarConfig,
   localizer,
@@ -53,6 +53,7 @@ export const CalendarPage = () => {
         onSelectEvent={onSelect}
         onView={onViewChange}
       />
+      <CalendarModal/>
     </>
   );
 };
