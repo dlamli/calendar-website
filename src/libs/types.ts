@@ -41,3 +41,5 @@ export type TonSelect = (
 ) => void;
 
 export type TonViewChange = (e: View) => void;
+
+export type TView = View | undefined;

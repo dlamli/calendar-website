@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, View } from "react-big-calendar";
+import { Calendar } from "react-big-calendar";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -10,12 +10,15 @@ import {
   TonDoubleClick,
   TonSelect,
   TonViewChange,
+  TView,
 } from "@/libs";
 import { useCalendar } from "@/hooks";
 
 export const CalendarPage = () => {
-  const lsLastView: View | undefined = localStorage.getItem("lastView") as View | undefined;
-  const [lastView, setLastView] = useState<View | undefined>(lsLastView ?? "week");
+  const lsLastView: TView | (() => TView) = localStorage.getItem("lastView") as
+    | TView
+    | (() => TView);
+  const [lastView, setLastView] = useState<TView>(lsLastView ?? "week");
   const { events, getEventStyle } = useCalendar();
 
   const onDoubleClick: TonDoubleClick = (event, e) => {
