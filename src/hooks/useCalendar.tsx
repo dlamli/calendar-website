@@ -23,25 +23,23 @@ export const useCalendar = () => {
     },
   ];
 
-  const getEventStyle = () =>
+  const getEventStyle = (
     // event: TEvent,
     // start: Date,
     // end: Date,
     // isSelected: boolean
-    {
-      // console.log({ event, start, end, isSelected });
-
-      const style = {
-        backgroundColor: "#7F00FF",
-        borderRadius: "0px",
-        opacity: 0.8,
-        color: "white",
-      };
-
-      return {
-        style,
-      };
+  ) => {
+    const style = {
+      backgroundColor: "#7F00FF",
+      borderRadius: "0px",
+      opacity: 0.8,
+      color: "white",
     };
+
+    return {
+      style,
+    };
+  };
 
   return { events, getEventStyle };
 };
