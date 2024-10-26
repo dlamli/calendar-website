@@ -1,4 +1,4 @@
-import { Button } from "@/global/components";
+import { Button } from "@/calendar";
 import { CalendarIcon, HamburgerIcon } from "@/global/icons";
 
 export const Navbar = () => {
