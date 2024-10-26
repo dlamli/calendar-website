@@ -6,3 +6,6 @@ export * from "@/libs/types";
 
 // CN
 export * from "@/libs/tlMerge/cn";
+
+// Utils
+export * from "@/libs/utils";

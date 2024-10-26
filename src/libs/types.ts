@@ -9,3 +9,16 @@ export type TButton = {
   link?: string;
 };
 
+export type TEvent = {
+  title: string | undefined;
+  notes: string | undefined;
+  start: Date;
+  end: Date;
+  bgColor?: string;
+  user?: TUser | undefined;
+};
+
+export type TUser = {
+  _id: string;
+  name: string;
+};

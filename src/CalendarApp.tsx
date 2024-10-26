@@ -3,7 +3,7 @@ import { router } from "@/routes/router";
 
 export const CalendarApp = () => {
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen">
       <RouterProvider router={router} />
     </div>
   );
