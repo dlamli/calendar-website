@@ -1,6 +1,13 @@
 import { TEvent } from "@/libs";
 import { addHours } from "date-fns";
 
+/**
+ * Custom hook that provides calendar event data and styling.
+ *
+ * @returns {Object} An object containing:
+ * - `events`: An array of TEvent objects representing calendar events.
+ * - `getEventStyle`: A function that returns styling for calendar events.
+ */
 export const useCalendar = () => {
   const events: TEvent[] = [
     {
