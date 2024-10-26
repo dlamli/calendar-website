@@ -32,7 +32,7 @@ export const useCalendar = () => {
       // console.log({ event, start, end, isSelected });
 
       const style = {
-        backgroundColor: "#917Cf7",
+        backgroundColor: "#7F00FF",
         borderRadius: "0px",
         opacity: 0.8,
         color: "white",
