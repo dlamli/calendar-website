@@ -25,14 +25,9 @@ import { useCalendar, useCalendarStore, useUiStore } from "@/hooks";
 import { PlusIcon, TrashIcon } from "@/global";
 
 export const CalendarPage = () => {
-  // CHECK: TYPE ERROR
-  const convertStringToView = (str: string | null): TLocalStorageView => {
-    const view = CalendarView[str as keyof typeof CalendarView];
-    return view;
-  };
-
-  const lsLastView = localStorage.getItem("lastView");
-  const view = convertStringToView(lsLastView) ?? CalendarView.month;
+  const lsLastView: TLocalStorageView | string =
+    localStorage.getItem("lastView") ?? CalendarView.month;
+  const view = CalendarView[lsLastView as keyof typeof CalendarView];
   const [lastView, setLastView] = useState<TLocalStorageView>(view);
 
   const { getEventStyle } = useCalendar();

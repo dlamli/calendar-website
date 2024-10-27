@@ -73,6 +73,7 @@ export type TLocalStorageView = View | undefined;
 export enum CalendarView {
   month = "month",
   week = "week",
+  work_week = "work_week",
   day = "day",
   agenda = "agenda",
 }

@@ -1,4 +1,4 @@
-import { TEvent } from "@/libs";
+import { TCalendar, TEvent } from "@/libs";
 import { createSlice } from "@reduxjs/toolkit";
 import { addHours } from "date-fns";
 
@@ -22,21 +22,21 @@ export const calendarSlice = createSlice({
     activeEvent: null,
   },
   reducers: {
-    onSetActiveEvent: (state, { payload }) => {
+    onSetActiveEvent: (state: TCalendar, { payload }: { payload: TEvent }) => {
       state.activeEvent = payload;
     },
-    onAddNewEvent: (state, { payload }) => {
+    onAddNewEvent: (state: TCalendar, { payload }: { payload: TEvent }) => {
       state.events.push(payload);
       state.activeEvent = null;
     },
-    onUpdateEvent: (state, { payload }: { payload: TEvent }) => {
+    onUpdateEvent: (state: TCalendar, { payload }: { payload: TEvent }) => {
       state.events = state.events.map((event) => {
         if (event._id === payload._id) return payload;
 
         return event;
       });
     },
-    onDeleteEvent: (state) => {
+    onDeleteEvent: (state: TCalendar) => {
       if (state.activeEvent) {
         state.events = state.events.filter(
           (event: TEvent) => event._id !== state.activeEvent?._id
