@@ -2,8 +2,8 @@ import { ReactNode, SyntheticEvent } from "react";
 import { View } from "react-big-calendar";
 
 export type TIcon = {
-  className?: string;
-  currentColor?: string | "currentColor";
+  className: string;
+  currentColor: string;
 };
 
 export type TButton = {
@@ -15,11 +15,11 @@ export type TButton = {
 export type TEvent = {
   _id?: number;
   title: string;
-  notes?: string;
+  notes: string;
   start: Date;
   end: Date;
-  bgColor?: string;
-  user: TUser | undefined;
+  bgColor: string;
+  user: TUser;
 };
 
 export type TCalendarEvent = {
@@ -43,20 +43,6 @@ export type TOnSelect = (
 
 export type TOnViewChange = (e: View) => void;
 
-export type TView = View | undefined;
-
-export type TCalendarModal = {
-  children?: React.ReactNode;
-};
-
-export type TFormValue = {
-  title: string;
-  notes?: string;
-  start: Date;
-  end: Date;
-  user: TUser | undefined;
-};
-
 export type TDateProperty = "start" | "end";
 
 export type TDate = Date | null;
@@ -75,9 +61,19 @@ export type TUiStore = {
 
 export type TCalendar = {
   events: TEvent[];
-  activeEvent: TFormValue;
+  activeEvent: TEvent | null;
 };
 
 export type TCalendarStore = {
   calendar: TCalendar;
 };
+
+export type TLocalStorageView = View | undefined;
+
+export enum CalendarView {
+  month = "month",
+  week = "week",
+  work_week = "work_week",
+  day = "day",
+  agenda = "agenda",
+}

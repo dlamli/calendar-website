@@ -8,12 +8,11 @@ import "sweetalert2/dist/sweetalert2.min.css";
 
 import { SaveIcon } from "@/global";
 import { useCalendar, useForm, useUiStore } from "@/hooks";
-import { TFormValue } from "@/libs";
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
 
-const initFormValues: TFormValue = {
+const initFormValues = {
   title: "Test",
   notes: "Test Notes",
   start: new Date(),
