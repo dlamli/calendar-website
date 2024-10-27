@@ -17,6 +17,7 @@ export const useUiStore = () => {
   return {
     // Properties
     isDateModalOpen,
+    isModalClose: !!closeDateModal,
     // Methods
     closeDateModal,
     openDateModal,

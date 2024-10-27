@@ -54,6 +54,7 @@ export type TFormValue = {
   notes?: string;
   start: Date;
   end: Date;
+  user: TUser | undefined;
 };
 
 export type TDateProperty = "start" | "end";

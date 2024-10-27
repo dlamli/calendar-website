@@ -3,13 +3,14 @@ import { differenceInSeconds } from "date-fns";
 
 import Swal from "sweetalert2";
 
-import { TDate, TDateProperty, TFormValue, TOnInputChange } from "@/libs";
-import { useCalendarStore } from "@/hooks";
+import { TDate, TDateProperty, TEvent, TFormValue, TOnInputChange } from "@/libs";
+import { useCalendarStore, useUiStore } from "@/hooks";
 
-export const useForm = (initFormValues: TFormValue) => {
+export const useForm = (initFormValues: TEvent) => {
   const [formSubmitted, setformSubmitted] = useState(false);
   const [formValues, setFormValues] = useState<TFormValue>(initFormValues);
-  const { activeEvent } = useCalendarStore();
+  const { activeEvent, startSavingEvent } = useCalendarStore();
+  const { closeDateModal } = useUiStore();
 
   useEffect(() => {
     if (activeEvent) {
@@ -29,7 +30,7 @@ export const useForm = (initFormValues: TFormValue) => {
     // console.log({ event, changing });
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setformSubmitted(true);
 
@@ -43,6 +44,10 @@ export const useForm = (initFormValues: TFormValue) => {
     if (formValues.title.length <= 0) return;
 
     console.log(formValues);
+
+    await startSavingEvent(formValues);
+    closeDateModal();
+    setformSubmitted(false);
   };
 
   return {

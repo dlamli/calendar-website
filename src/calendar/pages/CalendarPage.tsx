@@ -3,7 +3,14 @@ import { Calendar } from "react-big-calendar";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
-import { CalendarEvent, CalendarModal, Navbar } from "@/calendar";
+import {
+  AddButton,
+  CalendarEvent,
+  CalendarModal,
+  DeleteButton,
+  Navbar,
+} from "@/calendar";
+
 import {
   initCalendarConfig,
   localizer,
@@ -12,7 +19,9 @@ import {
   TOnViewChange,
   TView,
 } from "@/libs";
+
 import { useCalendar, useCalendarStore, useUiStore } from "@/hooks";
+import { PlusIcon, TrashIcon } from "@/global";
 
 export const CalendarPage = () => {
   const lsLastView: TView | (() => TView) = localStorage.getItem("lastView") as
@@ -53,6 +62,12 @@ export const CalendarPage = () => {
         onView={onViewChange}
       />
       <CalendarModal />
+      <AddButton>
+        <PlusIcon currentColor="white" className="size-8 m-auto" />
+      </AddButton>
+      <DeleteButton>
+        <TrashIcon currentColor="white" className="size-8 m-auto" />
+      </DeleteButton>
     </>
   );
 };
