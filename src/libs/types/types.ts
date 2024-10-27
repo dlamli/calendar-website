@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from "react";
+import { ReactNode, SyntheticEvent } from "react";
 import { View } from "react-big-calendar";
 
 export type TIcon = {
@@ -7,16 +7,17 @@ export type TIcon = {
 };
 
 export type TButton = {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   link?: string;
 };
 
 export type TEvent = {
-  title: string | undefined;
-  notes?: string | undefined;
-  start?: Date;
-  end?: Date;
+  _id?: number;
+  title: string;
+  notes?: string;
+  start: Date;
+  end: Date;
   bgColor?: string;
   user: TUser | undefined;
 };
@@ -30,17 +31,17 @@ export type TUser = {
   name: string;
 };
 
-export type TonDoubleClick = (
+export type TOnDoubleClick = (
   event: TEvent,
   e: SyntheticEvent<HTMLElement, Event>
 ) => void;
 
-export type TonSelect = (
+export type TOnSelect = (
   event: TEvent,
   e: SyntheticEvent<HTMLElement, Event>
 ) => void;
 
-export type TonViewChange = (e: View) => void;
+export type TOnViewChange = (e: View) => void;
 
 export type TView = View | undefined;
 
@@ -59,12 +60,23 @@ export type TDateProperty = "start" | "end";
 
 export type TDate = Date | null;
 
-export type TonInputChange = {
+export type TOnInputChange = {
   target: HTMLInputElement | HTMLTextAreaElement;
 };
 
+export type TUi = {
+  isDateModalOpen: boolean;
+};
+
 export type TUiStore = {
-  ui: {
-    isDateModalOpen: boolean;
-  };
+  ui: TUi;
+};
+
+export type TCalendar = {
+  events: TEvent[];
+  activeEvent: TFormValue;
+};
+
+export type TCalendarStore = {
+  calendar: TCalendar;
 };

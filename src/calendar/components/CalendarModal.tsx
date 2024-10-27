@@ -6,7 +6,7 @@ import { addHours } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 
-import { SaveIcon } from "@/global/icons";
+import { SaveIcon } from "@/global";
 import { useCalendar, useForm, useUiStore } from "@/hooks";
 import { TFormValue } from "@/libs";
 

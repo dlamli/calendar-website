@@ -7,12 +7,12 @@ import { CalendarEvent, CalendarModal, Navbar } from "@/calendar";
 import {
   initCalendarConfig,
   localizer,
-  TonDoubleClick,
-  TonSelect,
-  TonViewChange,
+  TOnDoubleClick,
+  TOnSelect,
+  TOnViewChange,
   TView,
 } from "@/libs";
-import { useCalendar, useUiStore } from "@/hooks";
+import { useCalendar, useCalendarStore, useUiStore } from "@/hooks";
 
 export const CalendarPage = () => {
   const lsLastView: TView | (() => TView) = localStorage.getItem("lastView") as
@@ -20,16 +20,15 @@ export const CalendarPage = () => {
     | (() => TView);
   const [lastView, setLastView] = useState<TView>(lsLastView ?? "week");
 
-  const { events, getEventStyle } = useCalendar();
+  const { getEventStyle } = useCalendar();
   const { openDateModal } = useUiStore();
+  const { events, setActiveEvent } = useCalendarStore();
 
-  const onDoubleClick: TonDoubleClick = () => openDateModal();
+  const onDoubleClick: TOnDoubleClick = () => openDateModal();
 
-  const onSelect: TonSelect = (event, e) => {
-    console.log({ click: e, event });
-  };
+  const onSelect: TOnSelect = (event) => setActiveEvent(event);
 
-  const onViewChange: TonViewChange = (e) => {
+  const onViewChange: TOnViewChange = (e) => {
     localStorage.setItem("lastView", e);
     setLastView(e);
   };

@@ -1,6 +1,7 @@
-import { TUiStore } from "@/libs";
-import { onCloseDateModal, onOpenDateModal } from "@/store/ui";
 import { useDispatch, useSelector } from "react-redux";
+
+import { TUiStore } from "@/libs";
+import { onCloseDateModal, onOpenDateModal } from "@/store";
 
 export const useUiStore = () => {
   const { isDateModalOpen } = useSelector((state: TUiStore) => state.ui);

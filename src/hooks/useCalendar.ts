@@ -1,5 +1,6 @@
-import { TEvent } from "@/libs";
 import { addHours } from "date-fns";
+
+import { TEvent } from "@/libs";
 
 export const useCalendar = () => {
   const events: TEvent[] = [

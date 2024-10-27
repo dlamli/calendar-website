@@ -1,13 +1,23 @@
-import { TDate, TDateProperty, TFormValue, TonInputChange } from "@/libs";
+import { FormEvent, useEffect, useState } from "react";
 import { differenceInSeconds } from "date-fns";
-import { FormEvent, useState } from "react";
+
 import Swal from "sweetalert2";
+
+import { TDate, TDateProperty, TFormValue, TOnInputChange } from "@/libs";
+import { useCalendarStore } from "@/hooks";
 
 export const useForm = (initFormValues: TFormValue) => {
   const [formSubmitted, setformSubmitted] = useState(false);
-  const [formValues, setFormValues] = useState(initFormValues);
+  const [formValues, setFormValues] = useState<TFormValue>(initFormValues);
+  const { activeEvent } = useCalendarStore();
 
-  const onInputChange = ({ target }: TonInputChange) => {
+  useEffect(() => {
+    if (activeEvent) {
+      setFormValues(activeEvent);
+    }
+  }, [activeEvent]);
+
+  const onInputChange = ({ target }: TOnInputChange) => {
     setFormValues({
       ...formValues,
       [target.name]: target.value,
@@ -34,6 +44,7 @@ export const useForm = (initFormValues: TFormValue) => {
 
     console.log(formValues);
   };
+
   return {
     // Properties
     formSubmitted,

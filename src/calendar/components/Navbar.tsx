@@ -1,5 +1,5 @@
 import { Button } from "@/calendar";
-import { CalendarIcon, HamburgerIcon } from "@/global/icons";
+import { CalendarIcon, HamburgerIcon } from "@/global";
 
 export const Navbar = () => {
   return (
