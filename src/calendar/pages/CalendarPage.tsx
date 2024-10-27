@@ -12,22 +12,28 @@ import {
 } from "@/calendar";
 
 import {
+  CalendarView,
   initCalendarConfig,
   localizer,
+  TLocalStorageView,
   TOnDoubleClick,
   TOnSelect,
   TOnViewChange,
-  TView,
 } from "@/libs";
 
 import { useCalendar, useCalendarStore, useUiStore } from "@/hooks";
 import { PlusIcon, TrashIcon } from "@/global";
 
 export const CalendarPage = () => {
-  const lsLastView: TView | (() => TView) = localStorage.getItem("lastView") as
-    | TView
-    | (() => TView);
-  const [lastView, setLastView] = useState<TView>(lsLastView ?? "week");
+  // CHECK: TYPE ERROR
+  const convertStringToView = (str: string | null): TLocalStorageView => {
+    const view = CalendarView[str as keyof typeof CalendarView];
+    return view;
+  };
+
+  const lsLastView = localStorage.getItem("lastView");
+  const view = convertStringToView(lsLastView) ?? CalendarView.month;
+  const [lastView, setLastView] = useState<TLocalStorageView>(view);
 
   const { getEventStyle } = useCalendar();
   const { openDateModal } = useUiStore();

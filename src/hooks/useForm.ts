@@ -3,12 +3,13 @@ import { differenceInSeconds } from "date-fns";
 
 import Swal from "sweetalert2";
 
-import { TDate, TDateProperty, TEvent, TFormValue, TOnInputChange } from "@/libs";
+import { TDate, TDateProperty, TOnInputChange } from "@/libs";
 import { useCalendarStore, useUiStore } from "@/hooks";
 
-export const useForm = (initFormValues: TEvent) => {
+// !!TODO: TYPE ERROR
+export const useForm = (initFormValues) => {
   const [formSubmitted, setformSubmitted] = useState(false);
-  const [formValues, setFormValues] = useState<TFormValue>(initFormValues);
+  const [formValues, setFormValues] = useState(initFormValues);
   const { activeEvent, startSavingEvent } = useCalendarStore();
   const { closeDateModal } = useUiStore();
 
