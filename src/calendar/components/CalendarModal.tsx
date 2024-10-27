@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import { addHours } from "date-fns";
@@ -6,19 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import { SaveIcon } from "@/global/icons";
+import { useCalendar, useForm, useUiStore } from "@/hooks";
 import { TFormValue } from "@/libs";
-import { useForm } from "@/hooks";
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    width: "50%",
-    padding: "20px",
-  },
-};
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
@@ -31,19 +21,22 @@ const initFormValues: TFormValue = {
 };
 
 export const CalendarModal = () => {
-  const {
-    formValues,
-    isModalOpen,
-    titleClass,
-    onInputChange,
-    onCloseModal,
-    onSubmit,
-    onDateChange,
-  } = useForm(initFormValues);
+  const { formValues, formSubmitted, onSubmit, onInputChange, onDateChange } =
+    useForm(initFormValues);
+  const { isDateModalOpen, closeDateModal } = useUiStore();
+  const { customStyles } = useCalendar();
+
+  const titleClass = useMemo(() => {
+    if (!formSubmitted) return "";
+
+    return formValues.title.length > 0 ? "" : "!border-red-500";
+  }, [formValues.title, formSubmitted]);
+
+  const onCloseModal = () => closeDateModal();
 
   return (
     <Modal
-      isOpen={isModalOpen}
+      isOpen={isDateModalOpen}
       onRequestClose={onCloseModal}
       style={customStyles}
       overlayClassName="modal-bg"

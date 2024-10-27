@@ -1,21 +1,12 @@
-import { FormEvent, useMemo, useState } from "react";
-import Swal from "sweetalert2";
-
 import { TDate, TDateProperty, TFormValue, TonInputChange } from "@/libs";
 import { differenceInSeconds } from "date-fns";
+import { FormEvent, useState } from "react";
+import Swal from "sweetalert2";
 
 export const useForm = (initFormValues: TFormValue) => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
   const [formSubmitted, setformSubmitted] = useState(false);
   const [formValues, setFormValues] = useState(initFormValues);
 
-  const titleClass = useMemo(() => {
-    if (!formSubmitted) return "";
-
-    return formValues.title.length > 0 ? "" : "!border-red-500";
-  }, [formValues.title, formSubmitted]);
-
-  const onCloseModal = () => setIsModalOpen(false);
   const onInputChange = ({ target }: TonInputChange) => {
     setFormValues({
       ...formValues,
@@ -43,15 +34,13 @@ export const useForm = (initFormValues: TFormValue) => {
 
     console.log(formValues);
   };
-
   return {
+    // Properties
     formSubmitted,
     formValues,
-    isModalOpen,
-    titleClass,
-    onCloseModal,
-    onDateChange,
+    // Methods
     onInputChange,
+    onDateChange,
     onSubmit,
   };
 };

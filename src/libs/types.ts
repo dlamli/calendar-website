@@ -62,3 +62,9 @@ export type TDate = Date | null;
 export type TonInputChange = {
   target: HTMLInputElement | HTMLTextAreaElement;
 };
+
+export type TUiStore = {
+  ui: {
+    isDateModalOpen: boolean;
+  };
+};
