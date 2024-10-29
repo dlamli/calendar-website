@@ -65,8 +65,18 @@ export type TUi = {
   isDateModalOpen: boolean;
 };
 
+export type TAuth = {
+  status: boolean;
+  user: TUser | undefined;
+  errorMessage: string | undefined;
+};
+
 export type TUiStore = {
   ui: TUi;
+};
+
+export type TAuthStore = {
+  auth: TAuth;
 };
 
 export type TCalendar = {

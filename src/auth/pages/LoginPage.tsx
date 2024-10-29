@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/hooks";
 import { TLoginFormFields, TRegisterFormFields } from "@/libs";
 import { useForm } from "@tanstack/react-form";
 
@@ -13,10 +14,13 @@ const registerFormFields: TRegisterFormFields = {
 };
 
 export const LoginPage = () => {
+  const { startLogin } = useAuthStore();
+
   const loginForm = useForm({
     defaultValues: loginFormFields,
     onSubmit: async ({ value: loginFormValues }) => {
-      console.log({ loginFormValues });
+      await startLogin(loginFormValues);
+      // console.log({ email, password });
     },
   });
 
