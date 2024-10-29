@@ -1,6 +1,8 @@
 import { useAuthStore } from "@/hooks";
 import { TLoginFormFields, TRegisterFormFields } from "@/libs";
 import { useForm } from "@tanstack/react-form";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const loginFormFields: TLoginFormFields = {
   email: "",
@@ -14,13 +16,12 @@ const registerFormFields: TRegisterFormFields = {
 };
 
 export const LoginPage = () => {
-  const { startLogin } = useAuthStore();
+  const { startLogin, errorMessage } = useAuthStore();
 
   const loginForm = useForm({
     defaultValues: loginFormFields,
     onSubmit: async ({ value: loginFormValues }) => {
       await startLogin(loginFormValues);
-      // console.log({ email, password });
     },
   });
 
@@ -30,6 +31,12 @@ export const LoginPage = () => {
       console.log({ registerFormValues });
     },
   });
+
+  useEffect(() => {
+    if (errorMessage !== undefined) {
+      Swal.fire("Error", errorMessage, "error");
+    }
+  }, [errorMessage]);
 
   return (
     <div className="mx-5 lg:mx-auto lg:container min-h-screen flex items-center justify-center">

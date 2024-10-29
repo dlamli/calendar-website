@@ -1,7 +1,9 @@
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
 import { calendarApi } from "@/apis";
 import { TAuthStore, TLoginFormFields } from "@/libs";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { onChecking, onClearErrorMessage, onLogin, onLogout } from "@/store";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
@@ -11,15 +13,24 @@ export const useAuthStore = () => {
 
   const startLogin = async ({ email, password }: TLoginFormFields) => {
     try {
-      const response = await calendarApi.post("/auth", {
+      dispatch(onChecking());
+      const { data } = await calendarApi.post("/auth", {
         email,
         password,
       });
 
-      console.log({ response });
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("token-init-date", new Date().getTime().toString());
+
+      dispatch(onLogin(data.user));
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         console.log(error.response?.data);
+        dispatch(onLogout("Incorrect email or password"));
+
+        setTimeout(() => {
+          dispatch(onClearErrorMessage());
+        }, 500);
       }
     }
   };
