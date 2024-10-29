@@ -45,10 +45,6 @@ export type TOnViewChange = (e: View) => void;
 
 export type TView = View | undefined;
 
-export type TCalendarModal = {
-  children?: React.ReactNode;
-};
-
 export type TFormValue = {
   title: string;
   notes?: string;

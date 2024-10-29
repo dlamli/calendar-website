@@ -18,6 +18,7 @@ const initFormValues: TFormValue = {
   notes: "Test Notes",
   start: new Date(),
   end: addHours(new Date(), 2),
+  user: undefined,
 };
 
 export const CalendarModal = () => {
