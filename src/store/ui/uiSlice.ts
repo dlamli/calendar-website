@@ -1,7 +1,8 @@
+import { STORE_STATE } from "@/libs";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const uiSlice = createSlice({
-  name: "ui",
+  name: STORE_STATE.UI,
   initialState: {
     isDateModalOpen: false,
   },

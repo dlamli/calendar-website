@@ -87,3 +87,15 @@ export enum CalendarView {
   day = "day",
   agenda = "agenda",
 }
+
+export type TLoginFormFields = {
+  email: string;
+  password: string;
+};
+
+export type TRegisterFormFields = {
+  name: string;
+  email: string;
+  password: string;
+  repeatPassword: string;
+};

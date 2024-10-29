@@ -1,6 +1,6 @@
-import { TCalendar, TEvent } from "@/libs";
 import { createSlice } from "@reduxjs/toolkit";
 import { addHours } from "date-fns";
+import { STORE_STATE, TCalendar, TEvent } from "@/libs";
 
 const tempEvent: TEvent = {
   _id: new Date().getTime(),
@@ -16,7 +16,7 @@ const tempEvent: TEvent = {
 };
 
 export const calendarSlice = createSlice({
-  name: "calendar",
+  name: STORE_STATE.CALENDAR,
   initialState: {
     events: [tempEvent],
     activeEvent: null,
