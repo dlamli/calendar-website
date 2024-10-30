@@ -18,22 +18,22 @@ const registerFormFields: TRegisterFormFields = {
 export const LoginPage = () => {
   const { startLogin, errorMessage } = useAuthStore();
 
-  const loginForm = useForm({
+  const { handleSubmit: handleLoginSubmit, Field: LoginField } = useForm({
     defaultValues: loginFormFields,
-    onSubmit: async ({ value: loginFormValues }) => {
-      await startLogin(loginFormValues);
+    onSubmit: async ({ value: loginValues }) => {
+      await startLogin(loginValues);
     },
   });
 
-  const registerForm = useForm({
+  const { handleSubmit: handleRegisterSubmit, Field: RegisterField } = useForm({
     defaultValues: registerFormFields,
-    onSubmit: async ({ value: registerFormValues }) => {
-      console.log({ registerFormValues });
+    onSubmit: async ({ value: registerValues }) => {
+      console.log({ registerValues });
     },
   });
 
   useEffect(() => {
-    if (errorMessage !== undefined) {
+    if (errorMessage) {
       Swal.fire("Error", errorMessage, "error");
     }
   }, [errorMessage]);
@@ -46,14 +46,13 @@ export const LoginPage = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              e.stopPropagation();
-              loginForm.handleSubmit();
+              handleLoginSubmit();
             }}
             className="max-w-sm mx-auto"
           >
             <div className="mb-5">
               <label htmlFor="email">Email</label>
-              <loginForm.Field
+              <LoginField
                 name="email"
                 children={(field) => (
                   <input
@@ -63,7 +62,7 @@ export const LoginPage = () => {
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 shadow-md"
-                    placeholder="userplaceholder@email.com"
+                    placeholder="user@example.com"
                     autoComplete="off"
                     required
                   />
@@ -72,7 +71,7 @@ export const LoginPage = () => {
             </div>
             <div className="mb-5">
               <label htmlFor="password">Password</label>
-              <loginForm.Field
+              <LoginField
                 name="password"
                 children={(field) => (
                   <input
@@ -102,8 +101,7 @@ export const LoginPage = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              e.stopPropagation();
-              registerForm.handleSubmit();
+              handleRegisterSubmit();
             }}
             className="max-w-sm mx-auto"
           >
@@ -111,7 +109,7 @@ export const LoginPage = () => {
               <label className="text-white" htmlFor="name">
                 Name
               </label>
-              <registerForm.Field
+              <RegisterField
                 name="name"
                 children={(field) => (
                   <input
@@ -131,7 +129,7 @@ export const LoginPage = () => {
               <label className="text-white" htmlFor="email">
                 Email
               </label>
-              <registerForm.Field
+              <RegisterField
                 name="email"
                 children={(field) => (
                   <input
@@ -141,7 +139,7 @@ export const LoginPage = () => {
                     value={field.state.value}
                     onChange={(e) => field.handleChange(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    placeholder="userplaceholder@email.com"
+                    placeholder="user@example.com"
                     autoComplete="off"
                     required
                   />
@@ -149,10 +147,10 @@ export const LoginPage = () => {
               />
             </div>
             <div className="mb-5">
-              <label className="text-white" htmlFor="name">
+              <label className="text-white" htmlFor="password">
                 Password
               </label>
-              <registerForm.Field
+              <RegisterField
                 name="password"
                 children={(field) => (
                   <input
@@ -170,10 +168,10 @@ export const LoginPage = () => {
               />
             </div>
             <div className="mb-5">
-              <label className="text-white" htmlFor="name">
+              <label className="text-white" htmlFor="repeatPassword">
                 Repeat Password
               </label>
-              <registerForm.Field
+              <RegisterField
                 name="repeatPassword"
                 children={(field) => (
                   <input
