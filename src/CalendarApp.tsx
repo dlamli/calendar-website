@@ -14,26 +14,36 @@ import { LoginPage } from "@/auth";
 import { useAuthStore } from "@/hooks";
 
 export const CalendarApp = () => {
-  const { status: authStatus, checkAuthToken } = useAuthStore();
+  const { status, checkAuthToken } = useAuthStore();
 
   useEffect(() => {
+    // console.log('CHECK AUTH');
     checkAuthToken();
-  });
+  }, []);
 
-  if (authStatus === AUTH_STATUS.CHECKING) return <div>Loading...</div>;
+  if (status === AUTH_STATUS.CHECKING)
+    return <div className="flex justify-center">Loading...</div>;
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
-        {authStatus === AUTH_STATUS.UNAUTHORIZED ? (
-          <Route path={URL_PATH.AUTH_OTHER} element={<LoginPage />} />
+        {status === AUTH_STATUS.UNAUTHORIZED ? (
+          <>
+            <Route path={URL_PATH.AUTH_OTHER} element={<LoginPage />} />
+            <Route
+              path={URL_PATH.HOME_OTHER}
+              element={<Navigate to={URL_PATH.AUTH_LOGIN} />}
+            />
+          </>
         ) : (
-          <Route path={URL_PATH.HOME_OTHER} element={<CalendarPage />} />
+          <>
+            <Route path={URL_PATH.HOME} element={<CalendarPage />} />
+            <Route
+              path={URL_PATH.HOME_OTHER}
+              element={<Navigate to={URL_PATH.HOME} />}
+            />
+          </>
         )}
-        <Route
-          path={URL_PATH.HOME_OTHER}
-          element={<Navigate to={URL_PATH.AUTH_LOGIN} />}
-        />
       </Route>
     )
   );

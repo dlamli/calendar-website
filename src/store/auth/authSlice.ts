@@ -14,11 +14,6 @@ export const authSlice = createSlice({
       state.user = undefined;
       state.errorMessage = undefined;
     },
-    onUnAuthorized: (state) => {
-      state.status = AUTH_STATUS.UNAUTHORIZED;
-      state.user = undefined;
-      state.errorMessage = undefined;
-    },
     onLogin: (state, { payload }) => {
       state.status = AUTH_STATUS.AUTHORIZED;
       state.user = payload;
@@ -28,6 +23,11 @@ export const authSlice = createSlice({
       state.status = AUTH_STATUS.UNAUTHORIZED;
       state.user = undefined;
       state.errorMessage = payload;
+    },
+    onUnAuthorized: (state) => {
+      state.status = AUTH_STATUS.UNAUTHORIZED;
+      state.user = undefined;
+      state.errorMessage = undefined;
     },
     onClearErrorMessage: (state) => {
       state.errorMessage = undefined;

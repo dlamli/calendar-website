@@ -3,7 +3,13 @@ import axios from "axios";
 
 import { calendarApi } from "@/apis";
 import { TAuthStore, TLoginFormFields, TRegisterFormFields } from "@/libs";
-import { onChecking, onClearErrorMessage, onLogin, onLogout, onUnAuthorized } from "@/store";
+import {
+  onChecking,
+  onClearErrorMessage,
+  onLogin,
+  onLogout,
+  onUnAuthorized,
+} from "@/store";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
@@ -63,7 +69,6 @@ export const useAuthStore = () => {
 
     try {
       const { data } = await calendarApi.get("/auth/renew");
-      console.log(data);
       localStorage.setItem("token", data.token);
       localStorage.setItem("token-init-date", new Date().getTime().toString());
       dispatch(onLogin(data.user));
@@ -73,6 +78,11 @@ export const useAuthStore = () => {
     }
   };
 
+  const startLogout = () => {
+    localStorage.clear();
+    dispatch(onUnAuthorized());
+  };
+
   return {
     // Properties
     status,
@@ -80,6 +90,7 @@ export const useAuthStore = () => {
     errorMessage,
     // Methods
     startLogin,
+    startLogout,
     startRegister,
     checkAuthToken,
   };

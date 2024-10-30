@@ -10,6 +10,7 @@ export type TButton = {
   children: ReactNode;
   className?: string;
   link?: string;
+  onClick?: () => void;
 };
 
 export type TEvent = {

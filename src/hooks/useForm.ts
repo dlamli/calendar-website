@@ -28,7 +28,6 @@ export const useForm = (initFormValues) => {
 
   const onDateChange = (event: TDate, changing: TDateProperty) => {
     setFormValues({ ...formValues, [changing]: event });
-    // console.log({ event, changing });
   };
 
   const onSubmit = async (e: FormEvent) => {
@@ -43,8 +42,6 @@ export const useForm = (initFormValues) => {
     }
 
     if (formValues.title.length <= 0) return;
-
-    console.log(formValues);
 
     await startSavingEvent(formValues);
     closeDateModal();
