@@ -3,11 +3,13 @@ import axios from "axios";
 
 import { calendarApi } from "@/apis";
 import { TAuthStore, TLoginFormFields, TRegisterFormFields } from "@/libs";
+
 import {
   onChecking,
   onClearErrorMessage,
   onLogin,
   onLogout,
+  onLogoutCalendar,
   onUnAuthorized,
 } from "@/store";
 
@@ -80,6 +82,7 @@ export const useAuthStore = () => {
 
   const startLogout = () => {
     localStorage.clear();
+    dispatch(onLogoutCalendar());
     dispatch(onUnAuthorized());
   };
 

@@ -14,13 +14,13 @@ export type TButton = {
 };
 
 export type TEvent = {
-  _id?: number;
+  id?: number;
   title: string;
-  notes: string;
-  start: Date;
-  end: Date;
-  bgColor: string;
-  user: TUser;
+  notes?: string;
+  start: string;
+  end: string;
+  bgColor?: string;
+  user: TUser | undefined;
 };
 
 export type TCalendarEvent = {
@@ -28,7 +28,7 @@ export type TCalendarEvent = {
 };
 
 export type TUser = {
-  _id: string;
+  id: string;
   name: string;
 };
 
@@ -83,6 +83,7 @@ export type TAuthStore = {
 };
 
 export type TCalendar = {
+  isLoading: boolean;
   events: TEvent[];
   activeEvent: TEvent | null;
 };

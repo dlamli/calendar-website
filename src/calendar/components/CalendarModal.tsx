@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "sweetalert2/dist/sweetalert2.min.css";
 
 import { SaveIcon } from "@/global";
-import { useCalendar, useForm, useUiStore } from "@/hooks";
+import { useForm, useUiStore } from "@/hooks";
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
@@ -24,7 +24,17 @@ export const CalendarModal = () => {
   const { formValues, formSubmitted, onSubmit, onInputChange, onDateChange } =
     useForm(initFormValues);
   const { isDateModalOpen, closeDateModal } = useUiStore();
-  const { customStyles } = useCalendar();
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      width: "50%",
+      padding: "20px",
+    },
+  };
 
   const titleClass = useMemo(() => {
     if (!formSubmitted) return "";
