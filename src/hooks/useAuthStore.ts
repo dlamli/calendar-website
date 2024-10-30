@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 import { calendarApi } from "@/apis";
-import { TAuthStore, TLoginFormFields } from "@/libs";
+import { TAuthStore, TLoginFormFields, TRegisterFormFields } from "@/libs";
 import { onChecking, onClearErrorMessage, onLogin, onLogout } from "@/store";
 
 export const useAuthStore = () => {
@@ -25,12 +25,34 @@ export const useAuthStore = () => {
       dispatch(onLogin(data.user));
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
-        console.log(error.response?.data);
-        dispatch(onLogout("Incorrect email or password"));
+        const { response } = error;
+        dispatch(onLogout(response?.data?.msg));
 
         setTimeout(() => {
           dispatch(onClearErrorMessage());
         }, 500);
+      }
+    }
+  };
+
+  const startRegister = async ({
+    name,
+    email,
+    password,
+  }: TRegisterFormFields) => {
+    try {
+      dispatch(onChecking());
+      const { data } = await calendarApi.post("/auth/new", {
+        name,
+        email,
+        password,
+      });
+
+      dispatch(onLogin(data.user));
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const { response } = error;
+        dispatch(onLogout(response?.data?.msg));
       }
     }
   };
@@ -42,5 +64,6 @@ export const useAuthStore = () => {
     errorMessage,
     // Methods
     startLogin,
+    startRegister,
   };
 };

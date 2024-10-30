@@ -16,19 +16,29 @@ const registerFormFields: TRegisterFormFields = {
 };
 
 export const LoginPage = () => {
-  const { startLogin, errorMessage } = useAuthStore();
+  const { errorMessage, startLogin, startRegister } = useAuthStore();
 
   const { handleSubmit: handleLoginSubmit, Field: LoginField } = useForm({
     defaultValues: loginFormFields,
-    onSubmit: async ({ value: loginValues }) => {
+    onSubmit: async ({ value: loginValues }: { value: TLoginFormFields }) => {
       await startLogin(loginValues);
     },
   });
 
   const { handleSubmit: handleRegisterSubmit, Field: RegisterField } = useForm({
     defaultValues: registerFormFields,
-    onSubmit: async ({ value: registerValues }) => {
-      console.log({ registerValues });
+    onSubmit: async ({
+      value: registerValues,
+    }: {
+      value: TRegisterFormFields;
+    }) => {
+      const { password, repeatPassword } = registerValues;
+
+      if (password !== repeatPassword) {
+        Swal.fire("Error", "Passwords do not match", "error");
+        return;
+      }
+      await startRegister(registerValues);
     },
   });
 
