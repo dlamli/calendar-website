@@ -55,6 +55,8 @@ export type TFormValue = {
 
 export type TDateProperty = "start" | "end";
 
+export type TStatus = "checking" | "authenticated" | "not-authenticated";
+
 export type TDate = Date | null;
 
 export type TOnInputChange = {
@@ -66,7 +68,7 @@ export type TUi = {
 };
 
 export type TAuth = {
-  status: boolean;
+  status: TStatus;
   user: TUser | undefined;
   errorMessage: string | undefined;
 };

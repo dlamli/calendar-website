@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { calendarApi } from "@/apis";
 import { TAuthStore, TLoginFormFields, TRegisterFormFields } from "@/libs";
-import { onChecking, onClearErrorMessage, onLogin, onLogout } from "@/store";
+import { onChecking, onClearErrorMessage, onLogin, onLogout, onUnAuthorized } from "@/store";
 
 export const useAuthStore = () => {
   const dispatch = useDispatch();
@@ -57,6 +57,22 @@ export const useAuthStore = () => {
     }
   };
 
+  const checkAuthToken = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) return dispatch(onUnAuthorized());
+
+    try {
+      const { data } = await calendarApi.get("/auth/renew");
+      console.log(data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("token-init-date", new Date().getTime().toString());
+      dispatch(onLogin(data.user));
+    } catch (error) {
+      localStorage.clear();
+      dispatch(onUnAuthorized());
+    }
+  };
+
   return {
     // Properties
     status,
@@ -65,5 +81,6 @@ export const useAuthStore = () => {
     // Methods
     startLogin,
     startRegister,
+    checkAuthToken,
   };
 };
