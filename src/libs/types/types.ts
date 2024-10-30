@@ -17,8 +17,8 @@ export type TEvent = {
   id?: number;
   title: string;
   notes?: string;
-  start: string;
-  end: string;
+  start: Date;
+  end: Date;
   bgColor?: string;
   user: TUser | undefined;
 };
@@ -28,6 +28,7 @@ export type TCalendarEvent = {
 };
 
 export type TUser = {
+  _id?: string;
   id: string;
   name: string;
 };

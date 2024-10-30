@@ -15,6 +15,7 @@ import {
   CalendarView,
   initCalendarConfig,
   localizer,
+  TEvent,
   TLocalStorageView,
   TOnDoubleClick,
   TOnSelect,
@@ -44,9 +45,8 @@ export const CalendarPage = () => {
   };
 
   // !!TODO: TYPE ERROR
-  const getEventStyle = (event) => {
-    const isMyEvent =
-      user?.id === event.user?._id || user?.id === event.user?.uid;
+  const getEventStyle = (event: TEvent) => {
+    const isMyEvent = user?.id === event.user?._id;
 
     const style = {
       backgroundColor: isMyEvent ? "#7F00FF" : "#464646",

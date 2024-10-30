@@ -3,11 +3,10 @@ import { differenceInSeconds } from "date-fns";
 
 import Swal from "sweetalert2";
 
-import { TDate, TDateProperty, TOnInputChange } from "@/libs";
+import { TDate, TDateProperty, TEvent, TOnInputChange } from "@/libs";
 import { useCalendarStore, useUiStore } from "@/hooks";
 
-// !!TODO: TYPE ERROR
-export const useForm = (initFormValues) => {
+export const useForm = (initFormValues : TEvent) => {
   const [formSubmitted, setformSubmitted] = useState(false);
   const [formValues, setFormValues] = useState(initFormValues);
   const { activeEvent, startSavingEvent } = useCalendarStore();

@@ -16,3 +16,5 @@ export const STORE_STATE = {
   CALENDAR: "calendar",
   UI: "ui",
 };
+
+export const DATE_FORMAT = "yyyy-MM-dd";
