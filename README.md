@@ -70,7 +70,7 @@ Make sure you have the following installed on your machine:
 
 ```bash
 git clone https://github.com/dlamli/calendar-website.git
-cd spotify-website-clone
+cd calendar-website
 ```
 
 **Installation**
