@@ -56,11 +56,18 @@ export const useAuthStore = () => {
         password,
       });
 
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("token-init-date", new Date().getTime().toString());
+
       dispatch(onLogin(data.user));
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         const { response } = error;
         dispatch(onLogout(response?.data?.msg));
+
+        setTimeout(() => {
+          dispatch(onClearErrorMessage());
+        }, 500);
       }
     }
   };

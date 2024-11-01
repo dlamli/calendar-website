@@ -44,9 +44,9 @@ export const CalendarPage = () => {
     setLastView(e);
   };
 
-  // !!TODO: TYPE ERROR
   const getEventStyle = (event: TEvent) => {
-    const isMyEvent = user?.id === event.user?._id;
+    const isMyEvent =
+      user?.id === event.user?._id || user?.id === event.user?.id;
 
     const style = {
       backgroundColor: isMyEvent ? "#7F00FF" : "#464646",
