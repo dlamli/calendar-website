@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 
 import { AUTH_STATUS, URL_PATH } from "@/libs";
-import { CalendarPage } from "@/calendar";
+import { CalendarPage, Spinner } from "@/calendar";
 import { LoginPage } from "@/auth";
 import { useAuthStore } from "@/hooks";
 
@@ -17,12 +17,10 @@ export const CalendarApp = () => {
   const { status, checkAuthToken } = useAuthStore();
 
   useEffect(() => {
-    // console.log('CHECK AUTH');
     checkAuthToken();
   }, []);
 
-  if (status === AUTH_STATUS.CHECKING)
-    return <div className="flex justify-center">Loading...</div>;
+  if (status === AUTH_STATUS.CHECKING) return <Spinner />;
 
   const router = createBrowserRouter(
     createRoutesFromElements(
