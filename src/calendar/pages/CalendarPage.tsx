@@ -84,12 +84,8 @@ export const CalendarPage = () => {
         onView={onViewChange}
       />
       <CalendarModal />
-      <AddButton>
-        <PlusIcon currentColor="white" className="size-8 m-auto" />
-      </AddButton>
-      <DeleteButton>
-        <TrashIcon currentColor="white" className="size-8 m-auto" />
-      </DeleteButton>
+      <AddButton />
+      <DeleteButton />
     </>
   );
 };

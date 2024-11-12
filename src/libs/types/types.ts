@@ -7,7 +7,7 @@ export type TIcon = {
 };
 
 export type TButton = {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
   link?: string;
   onClick?: () => void;

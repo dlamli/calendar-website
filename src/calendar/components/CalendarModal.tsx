@@ -8,9 +8,12 @@ import "sweetalert2/dist/sweetalert2.min.css";
 
 import { SaveIcon } from "@/global";
 import { useForm, useUiStore } from "@/hooks";
+import { getEnvVariables } from "@/libs/utils";
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#root");
+if (getEnvVariables().VITE_MODE !== "test") {
+  Modal.setAppElement("#root");
+}
 
 const initFormValues = {
   title: "Test",

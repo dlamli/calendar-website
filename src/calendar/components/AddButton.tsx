@@ -1,8 +1,9 @@
+import { PlusIcon } from "@/global";
 import { useCalendarStore, useUiStore } from "@/hooks";
 import { cn, TButton } from "@/libs";
 import { addHours } from "date-fns";
 
-export const AddButton = ({ className, children }: TButton) => {
+export const AddButton = ({ className }: TButton) => {
   const { openDateModal } = useUiStore();
   const { setActiveEvent } = useCalendarStore();
   const onClickNew = () => {
@@ -29,7 +30,7 @@ export const AddButton = ({ className, children }: TButton) => {
           className
         )}
       >
-        {children}
+        <PlusIcon currentColor="white" className="size-8 m-auto" />
       </button>
     </>
   );
