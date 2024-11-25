@@ -5,32 +5,32 @@ export const authSlice = createSlice({
   name: STORE_STATE.AUTH,
   initialState: {
     status: AUTH_STATUS.CHECKING,
-    user: undefined,
-    errorMessage: undefined,
+    user: null,
+    errorMessage: null,
   },
   reducers: {
     onChecking: (state) => {
       state.status = AUTH_STATUS.CHECKING;
-      state.user = undefined;
-      state.errorMessage = undefined;
+      state.user = null;
+      state.errorMessage = null;
     },
     onLogin: (state, { payload }) => {
       state.status = AUTH_STATUS.AUTHORIZED;
       state.user = payload;
-      state.errorMessage = undefined;
+      state.errorMessage = null;
     },
     onLogout: (state, { payload }) => {
       state.status = AUTH_STATUS.UNAUTHORIZED;
-      state.user = undefined;
+      state.user = null;
       state.errorMessage = payload;
     },
     onUnAuthorized: (state) => {
       state.status = AUTH_STATUS.UNAUTHORIZED;
-      state.user = undefined;
-      state.errorMessage = undefined;
+      state.user = null;
+      state.errorMessage = null;
     },
     onClearErrorMessage: (state) => {
-      state.errorMessage = undefined;
+      state.errorMessage = null;
     },
   },
 });
